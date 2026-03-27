@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://script.google.com">
+<link rel="dns-prefetch" href="https://script.google.com">
 <style>
 body {
   margin:0;
@@ -51,10 +53,15 @@ body {
 
 <body>
 
-<div class="container" id="cards"></div>
+<div class="container" id="cards">
+  <div class="card">Loading...</div>
+  <div class="card">Loading...</div>
+  <div class="card">Loading...</div>
+  <div class="card">Loading...</div>
+</div>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbzlE99Tp3vCUMTo6rqxRg0aMGFtPJAVdwtu4NRA4TBKlQG2Y4w5aOKei4D0GwTzSt71/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbws6sDV7OiEJJ97FP0kJrFItrKxfl0QXTkF4zQtCQLZkgp5wCjoWEe5nbLOZjMNFc9I/exec";
 
 function render(data) {
   const container = document.getElementById("cards");
@@ -73,7 +80,7 @@ async function loadData() {
 }
 
 loadData();
-setInterval(loadData, 10000);
+setInterval(loadData, 30000);
 </script>
 
 </body>
