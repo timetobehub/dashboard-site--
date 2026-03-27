@@ -14,7 +14,7 @@ body {
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap:20px;
-  padding:20px;
+  padding:10px;
 }
 .card {
   background:#ffffff;
@@ -48,10 +48,27 @@ body {
   font-size:36px;
   font-weight:bold;
 }
+  
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.datetime {
+  white-space: nowrap;
+}
 </style>
 </head>
 
 <body>
+  
+<div class="header">
+  <div class="title">Dashboard</div>
+  <div class="datetime">📆 <span id="datetime"></span></div>
+</div>
 
 <div class="container" id="cards">
   <div class="card">Loading...</div>
@@ -82,6 +99,23 @@ async function loadData() {
 loadData();
 setInterval(loadData, 30000);
 </script>
+<script>
+function updateDateTime() {
+  const now = new Date();
 
+  const formatter = new Intl.DateTimeFormat('th-TH-u-ca-buddhist', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    weekday: 'short',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  document.getElementById("datetime").innerHTML = formatter.format(now);
+}
+
+updateDateTime();
+</script>
 </body>
 </html>
