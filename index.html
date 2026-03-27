@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background:#ffffff;
+}
+.container {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap:20px;
+  padding:20px;
+}
+.card {
+  background:#ffffff;
+  border-radius:16px;
+  padding:20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  text-align:center;
+}
+.label {
+  font-size:14px;
+  color:#666;
+  margin-bottom:10px;
+}
+.number {
+  font-size:36px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="cards"></div>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbzlE99Tp3vCUMTo6rqxRg0aMGFtPJAVdwtu4NRA4TBKlQG2Y4w5aOKei4D0GwTzSt71/exec";
+
+function render(data) {
+  const container = document.getElementById("cards");
+  container.innerHTML = data.labels.map((label, i) => `
+    <div class="card">
+      <div class="label">${label}</div>
+      <div class="number">${data.values[i]}</div>
+    </div>
+  `).join('');
+}
+
+async function loadData() {
+  const res = await fetch(API_URL);
+  const data = await res.json();
+  render(data);
+}
+
+loadData();
+setInterval(loadData, 10000);
+</script>
+
+</body>
+</html>
