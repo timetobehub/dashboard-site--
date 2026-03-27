@@ -20,13 +20,23 @@ body {
   padding:20px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   text-align:center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card:nth-child(1) { border-top: 4px solid #e74c3c; } /* ร้องเรียน */ 
-.card:nth-child(2) { border-top: 4px solid #3498db; } /* ความคิดเห็น */ 
-.card:nth-child(3) { border-top: 4px solid #f39c12; } /* ประชาพิจารณ์ */ 
-.card:nth-child(4) { border-top: 4px solid #2ecc71; } /* สอบถาม */
-  
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card:nth-child(1) { border-top: 5px solid #e74c3c; }
+.card:nth-child(2) { border-top: 5px solid #3498db; }
+.card:nth-child(3) { border-top: 5px solid #f39c12; }
+.card:nth-child(4) { border-top: 5px solid #2ecc71; }
+.card:nth-child(1) .number { color: #e74c3c; }
+.card:nth-child(2) .number { color: #3498db; }
+.card:nth-child(3) .number { color: #f39c12; }
+.card:nth-child(4) .number { color: #2ecc71; }
+
 .label {
   font-size:14px;
   color:#666;
