@@ -73,7 +73,7 @@ body {
   <div class="card">Loading...</div>
   <div class="card">Loading...</div>
   <div class="card">Loading...</div>
-  <div class="card">Loading...</div>
+  <!-- <div class="card">Loading...</div> -->
 </div>
 
 <script>
@@ -81,7 +81,12 @@ const API_URL = "https://script.google.com/macros/s/AKfycbws6sDV7OiEJJ97FP0kJrFI
 
 function render(data) {
   const container = document.getElementById("cards");
-  container.innerHTML = data.labels.map((label, i) => `
+
+  const filtered = data.labels
+    .map((label, i) => ({ label, value: data.values[i], index: i }))
+    .filter(item => item.index !== 2);
+  
+  container.innerHTML = filtered.labels.map((label, i) => `
     <div class="card">
       <div class="label">${label}</div>
       <div class="number">${data.values[i]}</div>
