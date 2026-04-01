@@ -142,6 +142,7 @@ function render(data) {
       scales: {
         y: {
           beginAtZero: true,
+          suggestedMax: Math.max(...values) + 1,
           ticks: {
             stepSize: 1
           }
