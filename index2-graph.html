@@ -140,11 +140,13 @@ function render(data) {
         }
       },
       scales: {
-        x: {
-          beginAtZero: true,
-          suggestedMax: Math.max(...values) + 1,
-          ticks: {
-            stepSize: 1
+          x: {
+            beginAtZero: true,
+            min: 0,
+            max: Math.max(5, Math.ceil(Math.max(...values) / 5) * 5),
+            ticks: {
+              stepSize: 5
+            }
           }
         }
       }
