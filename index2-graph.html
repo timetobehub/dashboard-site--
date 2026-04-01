@@ -46,10 +46,6 @@
   </head>
 
   <body>
-    <div class="header">
-      <div class="datetime">📆 <span id="datetime"></span></div>
-    </div>
-
     <div style="height: 300px; padding: 10px">
       <canvas id="myChart"></canvas>
     </div>
@@ -70,24 +66,6 @@
 
       loadData();
       setInterval(loadData, 30000);
-    </script>
-    <script>
-      function updateDateTime() {
-        const now = new Date();
-
-        const formatter = new Intl.DateTimeFormat("th-TH-u-ca-buddhist", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-          weekday: "short",
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-
-        document.getElementById("datetime").innerHTML = formatter.format(now);
-      }
-
-      updateDateTime();
     </script>
     <script>
       let chart;
