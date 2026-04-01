@@ -16,38 +16,7 @@ body {
   gap:20px;
   padding:10px;
 }
-.card {
-  background:#ffffff;
-  border-radius:16px;
-  padding:20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  text-align:center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-/* .card:nth-child(1) { border-top: 5px solid #e74c3c; }
-.card:nth-child(2) { border-top: 5px solid #3498db; }
-.card:nth-child(3) { border-top: 5px solid #f39c12; }
-.card:nth-child(4) { border-top: 5px solid #2ecc71; }
-.card:nth-child(1) .number { color: #e74c3c; }
-.card:nth-child(2) .number { color: #3498db; }
-.card:nth-child(3) .number { color: #f39c12; }
-.card:nth-child(4) .number { color: #2ecc71; } */
-.card-0 { border-top: 5px solid #e74c3c; }
-.card-1 { border-top: 5px solid #3498db; }
-.card-2 { border-top: 5px solid #f39c12; }
-.card-3 { border-top: 5px solid #2ecc71; }
-
-.card-0 .number { color: #e74c3c; }
-.card-1 .number { color: #3498db; }
-.card-2 .number { color: #f39c12; }
-.card-3 .number { color: #2ecc71; }
-
+  
 .label {
   font-size:14px;
   color:#666;
@@ -82,16 +51,21 @@ body {
   <div class="datetime">📆 <span id="datetime"></span></div>
 </div>
 
-<canvas id="myChart"></canvas>
+<div style="height:300px; padding:10px;">
+  <canvas id="myChart"></canvas>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbws6sDV7OiEJJ97FP0kJrFItrKxfl0QXTkF4zQtCQLZkgp5wCjoWEe5nbLOZjMNFc9I/exec";
 
-
 async function loadData() {
-  const res = await fetch(API_URL);
-  const data = await res.json();
-  render(data);
+  try {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+    render(data);
+  } catch (err) {
+    console.error('API error:', err);
+  }
 }
 
 loadData();
@@ -128,19 +102,31 @@ function render(data) {
 
   const ctx = document.getElementById('myChart').getContext('2d');
 
-  if (chart) chart.destroy();
+  if (chart) {
+  chart.data.labels = labels;
+  chart.data.datasets[0].data = values;
+  chart.update();
+  return;
+}
 
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: labels,
       datasets: [{
-        label: 'จำนวนเรื่อง',
-        data: values,
-        borderWidth: 1
-      }]
+  label: 'จำนวนเรื่อง',
+  data: values,
+  borderWidth: 1,
+  backgroundColor: [
+    '#e74c3c',
+    '#3498db',
+    '#f39c12',
+    '#2ecc71'
+  ]
+}]
     },
     options: {
+      indexAxis: 'y',
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
