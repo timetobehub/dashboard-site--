@@ -77,7 +77,7 @@
             value: Number(data.values[i]),
             index: i,
           }))
-          .filter((item) => item.index !== 4); // ❗ remove "เรื่องที่รับทั้งหมด"
+          .filter((item) => item.index !== 2); // ❗ remove "ประชาพิจารณ์"
 
         const labels = filtered.map((item) => item.label);
         const values = filtered.map((item) => item.value);
