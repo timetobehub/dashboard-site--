@@ -30,14 +30,6 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* .card:nth-child(1) { border-top: 5px solid #e74c3c; }
-.card:nth-child(2) { border-top: 5px solid #3498db; }
-.card:nth-child(3) { border-top: 5px solid #f39c12; }
-.card:nth-child(4) { border-top: 5px solid #2ecc71; }
-.card:nth-child(1) .number { color: #e74c3c; }
-.card:nth-child(2) .number { color: #3498db; }
-.card:nth-child(3) .number { color: #f39c12; }
-.card:nth-child(4) .number { color: #2ecc71; } */
 .card-0 { border-top: 5px solid #e74c3c; }
 .card-1 { border-top: 5px solid #3498db; }
 .card-2 { border-top: 5px solid #f39c12; }
@@ -82,7 +74,7 @@ body {
   <div class="card">Loading...</div>
   <div class="card">Loading...</div>
   <div class="card">Loading...</div>
-  <!-- <div class="card">Loading...</div> -->
+  <div class="card">Loading...</div>
 </div>
 
 <script>
@@ -92,8 +84,8 @@ function render(data) {
   const container = document.getElementById("cards");
 
   const filtered = data.labels
-    .map((label, i) => ({ label, value: data.values[i], index: i }))
-    .filter(item => item.index !== 2);
+    .map((label, i) => ({ label, value: data.values[i], index: i }));
+    // .filter(item => item.index !== 2);
   
   container.innerHTML = filtered.map(item => `
     <div class="card card-${item.index}">
